@@ -9,10 +9,11 @@ var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 
 var app = express();
-
 //Set up mongoose connection
+
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://markburnstein:puddymau@cluster0.pmjp8.mongodb.net/local_library?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://markburnstein:puddymau@cluster0.pmjp8.mongodb.net/local_library?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
